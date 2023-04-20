@@ -1,9 +1,10 @@
 from django.urls import path, include
-from .views import ActorViewSet, AddressViewSet, CityViewSet, CountryViewSet, CustomerViewSet, FilmActorViewSet, FilmCategoryViewSet, CategoryViewSet, FilmViewSet, InventoryViewSet, LanguageList, LanguageDetail, PaymentViewSet, RentalViewSet, StaffViewSet, StoreViewSet
+from .views import LanguageViewSet, TopCustomersAPIView, TopFilmsAPIView, ActorViewSet, AddressViewSet, CityViewSet, CountryViewSet, CustomerViewSet, FilmActorViewSet, FilmCategoryViewSet, CategoryViewSet, FilmViewSet, InventoryViewSet, PaymentViewSet, RentalViewSet, StaffViewSet, StoreViewSet
 from rest_framework import routers
 
 
 router = routers.DefaultRouter()
+router.register(r'languages', LanguageViewSet)
 router.register(r'films', FilmViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'filmcategories', FilmCategoryViewSet)
@@ -21,7 +22,7 @@ router.register(r'payments', PaymentViewSet)
 
 
 urlpatterns = [
-    path('languages/', LanguageList.as_view(), name='language_list'),
-    path('languages/<int:pk>/', LanguageDetail.as_view(), name='language_detail'),
+    path('topfilms/', TopFilmsAPIView.as_view()),
+    path('topcustomers/', TopCustomersAPIView.as_view()),
     path('', include(router.urls))
 ]

@@ -1,18 +1,27 @@
 from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+# from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.db.models import Count, Sum
 from .models import Inventory, Rental, Customer, Payment, Store, Staff, Address, City, Country, Actor, Category, Film, FilmActor, FilmCategory, Language
 from .serializers import ActorSerializer, AddressSerializer, CategorySerializer, CitySerializer, CountrySerializer, CustomerSerializer, FilmActorSerializer, FilmCategorySerializer, FilmSerializer, InventorySerializer, LanguageSerializer, PaymentSerializer, RentalSerializer, StaffSerializer, StoreSerializer
+
 
 # Create your views here.
 
 #Crea y lista languages
-class LanguageList(ListCreateAPIView):
-    queryset = Language.objects.all()
-    serializer_class = LanguageSerializer
+# class LanguageList(ListCreateAPIView):
+#     queryset = Language.objects.all()
+#     serializer_class = LanguageSerializer
 
-#Obtiene, actualiza, borra language con respectivo id
-class LanguageDetail(RetrieveUpdateDestroyAPIView):
+# #Obtiene, actualiza, borra language con respectivo id
+# class LanguageDetail(RetrieveUpdateDestroyAPIView):
+#     queryset = Language.objects.all()
+#     serializer_class = LanguageSerializer
+
+
+class LanguageViewSet(viewsets.ModelViewSet):
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
 
@@ -72,6 +81,22 @@ class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
 
 
+class TopCustomersAPIView(APIView):
+    def get(self, request):
+        top_customers = Customer.objects.annotate(total_payments=Sum('payment__amount')).order_by('-total_payments')[:5]
+        data = {
+            'top_customers': [
+                {
+                    'first_name': customer.first_name,
+                    'last_name': customer.last_name,
+                    'total_payments': customer.total_payments
+                } for customer in top_customers
+            ]
+        }
+        return Response(data)
+
+
+
 class InventoryViewSet(viewsets.ModelViewSet):
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
@@ -80,6 +105,22 @@ class InventoryViewSet(viewsets.ModelViewSet):
 class RentalViewSet(viewsets.ModelViewSet):
     queryset = Rental.objects.all()
     serializer_class = RentalSerializer
+
+
+#5 most rented movies
+class TopFilmsAPIView(APIView):
+    def get(self, request):
+        top_films = Film.objects.annotate(rental_count=Count('inventory__rental')).order_by('-rental_count')[:5]
+        data = {
+            'top_films': [
+                {
+                    'title': film.title,
+                    'description': film.description,
+                    'rental_count': film.rental_count
+                } for film in top_films
+            ]
+        }
+        return Response(data)
 
 
 class PaymentViewSet(viewsets.ModelViewSet):
