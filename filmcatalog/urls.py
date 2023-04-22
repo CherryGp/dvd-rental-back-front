@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import LanguageViewSet, TopCustomersAPIView, TopFilmsAPIView, ActorViewSet, AddressViewSet, CityViewSet, CountryViewSet, CustomerViewSet, FilmActorViewSet, FilmCategoryViewSet, CategoryViewSet, FilmViewSet, InventoryViewSet, PaymentViewSet, RentalViewSet, StaffViewSet, StoreViewSet
 from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
 
 
 router = routers.DefaultRouter()
@@ -24,5 +25,6 @@ router.register(r'payments', PaymentViewSet)
 urlpatterns = [
     path('topfilms/', TopFilmsAPIView.as_view()),
     path('topcustomers/', TopCustomersAPIView.as_view()),
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('docs/', include_docs_urls(title='documentation'))
 ]

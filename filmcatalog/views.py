@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,23 +8,11 @@ from .serializers import ActorSerializer, AddressSerializer, CategorySerializer,
 
 
 # Create your views here.
-
-#Crea y lista languages
-# class LanguageList(ListCreateAPIView):
-#     queryset = Language.objects.all()
-#     serializer_class = LanguageSerializer
-
-# #Obtiene, actualiza, borra language con respectivo id
-# class LanguageDetail(RetrieveUpdateDestroyAPIView):
-#     queryset = Language.objects.all()
-#     serializer_class = LanguageSerializer
-
-
 class LanguageViewSet(viewsets.ModelViewSet):
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
 
-#Permite get, post, update, delete
+#Allows get, post, update, delete
 class FilmViewSet(viewsets.ModelViewSet):
     queryset = Film.objects.all()
     serializer_class = FilmSerializer
