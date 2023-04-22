@@ -22,9 +22,14 @@ router.register(r'rentals', RentalViewSet)
 router.register(r'payments', PaymentViewSet)
 
 
+#5 most rented movies:
+#http://localhost:8000/dvdrental/topfilms/ 
+
+#5 best customers:
+#http://localhost:8000/dvdrental/topcustomers/
 urlpatterns = [
-    path('topfilms/', TopFilmsAPIView.as_view()),
-    path('topcustomers/', TopCustomersAPIView.as_view()),
+    path('topfilms/', TopFilmsAPIView.as_view()), 
+    path('topcustomers/', TopCustomersAPIView.as_view()), 
     path('', include(router.urls)),
     path('docs/', include_docs_urls(title='documentation'))
 ]
