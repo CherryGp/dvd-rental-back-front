@@ -7,6 +7,10 @@ export function Navigation() {
         <h1>Dvd rental inventory</h1>
         </Link>
         <Link to="/dvdrental/inventory-create/">create inventory</Link>
+        <h1>Top Customers</h1>
+        <Link to="/dvdrental/topcustomers/">Top Customers</Link>
+        <h1>Top films</h1>
+        <Link to="/dvdrental/topfilms/">Top Films</Link>
     </div>
   )
 }
@@ -20,8 +24,6 @@ export function Navigation() {
 //       <Link to="/inventory">
     //     <h1>Inventory</h1>
     //   </Link>
-    //   <Link to="/top-customers">Top Customers</Link>
-    //   <Link to="/top-films">Top Films</Link> */
 //     </div>
 //   )
 // }

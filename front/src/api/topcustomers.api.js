@@ -1,5 +1,5 @@
-// import axios from 'axios'
+import axios from 'axios'
 
-// export const getTopCustomers = () => {
-//     return axios.get('http://localhost:8000/dvdrental/topcustomers/')
-// }
+export const getTopCustomers = () => {
+    return axios.get('http://localhost:8000/dvdrental/topcustomers/')
+}

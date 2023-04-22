@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { InventoryPage } from './pages/InventoryPage';
 import { InventoryFormPage } from './pages/InventoryFormPage'
 import {Navigation} from "./components/Navigation"
+import { TopCustomersPage } from './pages/TopCustomersPage';
+import { TopFilmsPage } from './pages/TopFilmsPage';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Route path="/" element={<Navigate to="/dvdrental/inventory/" />} />
         <Route path="/dvdrental/inventory/" element={<InventoryPage/>} />
         <Route path="/dvdrental/inventory-create/" element={<InventoryFormPage/>} />
+        <Route path="/dvdrental/topcustomers/" element={<TopCustomersPage/>} />
+        <Route path="/dvdrental/topfilms/" element={<TopFilmsPage />} />
       </Routes>
     </BrowserRouter>
   );
