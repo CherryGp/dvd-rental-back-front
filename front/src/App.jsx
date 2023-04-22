@@ -4,6 +4,7 @@ import { InventoryFormPage } from './pages/InventoryFormPage'
 import {Navigation} from "./components/Navigation"
 import { TopCustomersPage } from './pages/TopCustomersPage';
 import { TopFilmsPage } from './pages/TopFilmsPage';
+import './App.css';
 
 function App() {
   return (
