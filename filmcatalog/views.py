@@ -83,7 +83,6 @@ class TopCustomersAPIView(APIView):
         return Response(data)
 
 
-
 class InventoryViewSet(viewsets.ModelViewSet):
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer

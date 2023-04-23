@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getInventory } from "../api/inventory.api";
+import { InventoryCard } from './InventoryCard';
 
 export function InventoryList() {
   const [items, saveInventory] = useState([]);
@@ -13,15 +14,10 @@ export function InventoryList() {
   }, []);
 
   return (
-    <div>
+    <div className="grid grid-cols-3 gap-3">
       {items.map((item) => (
-        <div key={item.inventory_id}>
-          <p>Inventory ID: {item.inventory_id}</p>
-          <p>Store ID: {item.store_id}</p>
-          <p>Last Update: {item.last_update}</p>
-          <p>Film ID: {item.film}</p>
-        </div>
-      ))}
+        <InventoryCard key={item.inventory_id} item={item} />
+     ))}
     </div>
   );
 }
