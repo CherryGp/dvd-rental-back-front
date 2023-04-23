@@ -53,18 +53,22 @@ export function InventoryFormPage() {
   return (
     <div>
       <form onSubmit={onSubmit}>
+        <label htmlFor="store_id">Store ID:</label>
         <input
           type="number"
           placeholder="Store_id"
           {...register("store_id", {required: true})}
         />
+        {/* <span>(Enter Store ID)</span> */}
         {errors.store_id && <span>Store_id is required</span>}
-
+        
+        <label htmlFor="film">Film ID:</label>
         <input
           type="number"
           placeholder="Film_id"
           {...register("film", {required: true})}
         />
+        {/* <span>(Enter Film ID)</span> */}
         {errors.film && <span>Film_id is required</
         span>}
 
